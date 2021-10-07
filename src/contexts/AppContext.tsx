@@ -6,6 +6,7 @@ export type Todo = {
   isCompleted: boolean;
   text: string;
   id: number;
+  order: number;
 };
 
 export type AppContextType = {
@@ -17,15 +18,21 @@ export type AppContextType = {
   itemsLeft: number;
   removeItem: (id: number) => void;
   toggleIsCompleted: (id: number) => void;
+  reorderTodos: (newDos: Readonly<Todo[]>) => void;
 };
 
 const sampleTodos: Todo[] = [
-  { id: 1, isCompleted: false, text: "Jog around the park 5x" },
-  { id: 2, isCompleted: true, text: "10 minutes meditation" },
-  { id: 3, isCompleted: true, text: "Read for 1 hour" },
-  { id: 4, isCompleted: false, text: "Pick up groceries" },
-  { id: 5, isCompleted: true, text: "Create Todo App on Frontend Mentor" },
-  { id: 6, isCompleted: true, text: "Create Mentor" },
+  { id: 1, order: 1, isCompleted: false, text: "Jog around the park 5x" },
+  { id: 2, order: 2, isCompleted: true, text: "10 minutes meditation" },
+  { id: 3, order: 3, isCompleted: true, text: "Read for 1 hour" },
+  { id: 4, order: 4, isCompleted: false, text: "Pick up groceries" },
+  {
+    id: 5,
+    order: 5,
+    isCompleted: true,
+    text: "Create Todo App on Frontend Mentor",
+  },
+  { id: 6, order: 6, isCompleted: true, text: "Create Mentor" },
 ];
 
 const initialValues: AppContextType = {
@@ -37,6 +44,7 @@ const initialValues: AppContextType = {
   itemsLeft: 0,
   removeItem: (id: number) => {},
   toggleIsCompleted: (id: number) => {},
+  reorderTodos: (newDos: Readonly<Todo[]>) => {},
 };
 
 export const AppContext = createContext<AppContextType>(initialValues);
@@ -54,6 +62,7 @@ export const AppContextProvider: FC = ({ children }) => {
       ...prev,
       {
         id: todos.length + 1,
+        order: todos.length + 1,
         isCompleted,
         text,
       },
@@ -72,8 +81,17 @@ export const AppContextProvider: FC = ({ children }) => {
     let item = todos.find((i) => i.id === id);
     item = { ...item, isCompleted: !item.isCompleted };
     setTodos((prev) =>
-      [...prev.filter((i) => i.id !== id), item].sort((a, b) => a.id - b.id)
+      [...prev.filter((i) => i.id !== id), item].sort(
+        (a, b) => a.order - b.order
+      )
     );
+  };
+  const reorderTodos = (newDos: Readonly<Todo[]>) => {
+    const newTodos = newDos.map((item, index) => ({
+      ...item,
+      order: index + 1,
+    }));
+    setTodos(newTodos);
   };
 
   return (
@@ -87,6 +105,7 @@ export const AppContextProvider: FC = ({ children }) => {
         removeItem,
         toggleIsCompleted,
         setFilter: (type) => setFilter(type),
+        reorderTodos,
       }}
     >
       {children}

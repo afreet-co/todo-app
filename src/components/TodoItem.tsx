@@ -1,45 +1,68 @@
-import React, { FC } from "react";
-import { useAppContext } from "../contexts/AppContext";
-import { useThemeContext } from "../contexts/ThemeContext";
+import React from "react";
+import { Todo, AppContext, AppContextType } from "../contexts/AppContext";
+import { ThemeContext, ThemeContextType } from "../contexts/ThemeContext";
 import { CustomCheckbox } from "./CustomCheckbox";
 import { Cross } from "./icons/cross";
-type TodoItemProps = {
-  id: number;
-  text: string;
-  isCompleted: boolean;
-};
-export const TodoItem: FC<TodoItemProps> = ({ id, isCompleted, text }) => {
-  const { filter, removeItem, toggleIsCompleted } = useAppContext();
-  const { theme } = useThemeContext();
-  return (
-    <>
-      {filter === "all" ||
-      (filter === "active" && !isCompleted) ||
-      (filter === "completed" && isCompleted) ? (
-        <div
-          className={`group flex py-3 px-4 items-center border-b-2 sm:border-b border-solid ${theme.border} last:border-b-0`}
-        >
-          <CustomCheckbox
-            checked={isCompleted}
-            controlId={"item" + id}
-            className="w-1/8"
-            onChanged={() => toggleIsCompleted(id)}
-          />
-          <p
-            className={`w-6/8 sm:w-7/8 sm:group-hover:w-6/8 ${
-              isCompleted ? `line-through ${theme.textMuted}` : theme.text
-            }`}
-          >
-            {text}
-          </p>
-          <button
-            className="w-1/8 sm:w-auto sm:group-hover:w-1/8 justify-center flex sm:hidden sm:group-hover:flex transition-all duration-150"
-            onClick={() => removeItem(id)}
-          >
-            <Cross />
-          </button>
-        </div>
-      ) : null}
-    </>
-  );
-};
+interface TodoItemProps {
+  item: Todo;
+  itemSelected: number;
+  dragHandleProps: object;
+}
+
+export class TodoItem extends React.Component<
+  TodoItemProps,
+  AppContextType & ThemeContextType
+> {
+  static appContext = AppContext;
+  static themeContext = ThemeContext;
+
+  render() {
+    const {
+      item: { id, isCompleted, text },
+      dragHandleProps,
+    } = this.props;
+
+    return (
+      <AppContext.Consumer>
+        {({ filter, removeItem, toggleIsCompleted }) => (
+          <ThemeContext.Consumer>
+            {({ theme }) => (
+              <>
+                {filter === "all" ||
+                (filter === "active" && !isCompleted) ||
+                (filter === "completed" && isCompleted) ? (
+                  <div
+                    className={`group flex py-3 px-4 cursor-move items-center border-b-2 sm:border-b border-solid ${theme.border} last:border-b-0  transition-all duration-150`}
+                    {...dragHandleProps}
+                  >
+                    <CustomCheckbox
+                      checked={isCompleted}
+                      controlId={"item" + id}
+                      className="w-1/8"
+                      onChanged={() => toggleIsCompleted(id)}
+                    />
+                    <p
+                      className={`w-6/8 transition-all duration-150 ${
+                        isCompleted
+                          ? `line-through ${theme.textMuted}`
+                          : theme.text
+                      }`}
+                    >
+                      {text}
+                    </p>
+                    <button
+                      className="w-1/8 justify-center flex sm:hidden sm:group-hover:flex transition-all duration-150"
+                      onClick={() => removeItem(id)}
+                    >
+                      <Cross />
+                    </button>
+                  </div>
+                ) : null}
+              </>
+            )}
+          </ThemeContext.Consumer>
+        )}
+      </AppContext.Consumer>
+    );
+  }
+}

@@ -3,14 +3,15 @@ import { CustomCheckbox } from "../components/CustomCheckbox";
 import { Filter } from "../components/Filter";
 import { ThemeSwitcher } from "../components/ThemeSwitcher";
 import { TodoFooter } from "../components/TodoFooter";
-import { TodoItem } from "../components/TodoItem";
+import { TodoList } from "../components/TodoList";
 import { useAppContext } from "../contexts/AppContext";
 import { useThemeContext } from "../contexts/ThemeContext";
 
 const Index = () => {
   const [checked, setChecked] = useState(false);
   const [text, setText] = useState("");
-  const { addNew, todos } = useAppContext();
+
+  const { addNew } = useAppContext();
   const { theme } = useThemeContext();
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
@@ -24,7 +25,7 @@ const Index = () => {
 
   return (
     <div
-      className={`flex items-center justify-center h-screen w-screen ${theme.screenBackground} sm:text-base text-sm`}
+      className={`flex items-center justify-center h-screen w-screen ${theme.screenBackground} sm:text-base text-sm transition-all duration-150`}
     >
       <div className="w-11/12 md:w-3/6 sm:w-2/5 p-2 space-y-6 sm:space-y-4">
         <div className="flex justify-between items-center px-2 :px-2">
@@ -33,7 +34,7 @@ const Index = () => {
         </div>
         <form
           onSubmit={handleSubmit}
-          className={`flex mt-4 mx-2 p-4 items-center ${theme.primaryBackground} rounded-lg sm:rounded shadow-lg`}
+          className={`flex mt-4 mx-2 p-4 items-center ${theme.primaryBackground} rounded-lg sm:rounded shadow-lg  transition-all duration-150`}
         >
           <CustomCheckbox
             checked={checked}
@@ -42,7 +43,7 @@ const Index = () => {
             className="w-1/8"
           />
           <input
-            className={`w-7/8 text-base sm:text-xl focus:outline-none ${theme.input} ${theme.primaryBackground}`}
+            className={`w-7/8 text-base sm:text-xl focus:outline-none ${theme.input} ${theme.primaryBackground}  transition-all duration-150`}
             type="text"
             placeholder="Create a new todo..."
             value={text}
@@ -50,17 +51,13 @@ const Index = () => {
           />
         </form>
         <div
-          className={`mx-2 ${theme.primaryBackground} rounded-lg sm:rounded shadow-lg`}
+          className={`mx-2 ${theme.primaryBackground} rounded-lg sm:rounded shadow-lg  transition-all duration-150`}
         >
-          <div className="h-80 sm:h-70 overflow-auto">
-            {todos.map((item) => (
-              <TodoItem key={item.id} {...item} />
-            ))}
-          </div>
+          <TodoList />
           <TodoFooter />
         </div>
         <div
-          className={`mx-2 rounded-lg sm:rounded shadow-lg px-5 sm:px-4 py-5 sm:py-3 block sm:hidden ${theme.primaryBackground}`}
+          className={`mx-2 rounded-lg sm:rounded shadow-lg px-5 sm:px-4 py-5 sm:py-3 block sm:hidden ${theme.primaryBackground}  transition-all duration-150`}
         >
           <Filter onMobile={true} />
         </div>
