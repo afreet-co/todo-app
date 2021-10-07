@@ -17,7 +17,7 @@ export const CustomCheckbox: FC<CustomCheckboxProps> = ({
   className,
 }) => {
   return (
-    <div className={`flex items-center ${className ? className : ""}`}>
+    <div className={`flex items-center relative${className ? className : ""}`}>
       <input
         type="checkbox"
         id={controlId}

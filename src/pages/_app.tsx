@@ -1,5 +1,6 @@
 import "../styles/global.css";
 import Head from "next/head";
+import { AppContextProvider } from "../contexts/AppContext";
 
 const Application = ({ Component, pageProps }) => {
   return (
@@ -35,7 +36,9 @@ const Application = ({ Component, pageProps }) => {
           href={`${process.env.NEXT_PUBLIC_PREFIX}/site.webmanifest`}
         />
       </Head>
-      <Component {...pageProps} />
+      <AppContextProvider>
+        <Component {...pageProps} />
+      </AppContextProvider>
     </>
   );
 };

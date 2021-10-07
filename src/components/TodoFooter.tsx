@@ -1,28 +1,32 @@
 import React, { FC, useState } from "react";
+import { useAppContext } from "../contexts/AppContext";
 
 export const TodoFooter: FC = () => {
-  const [cat, setCat] = useState<"all" | "active" | "completed">("all");
+  const { itemsLeft, setFilter, filter, clearCompleted } = useAppContext();
+
   return (
     <div className="flex justify-between px-4 py-3 text-dark-300 text-sm">
-      <div>5 items left</div>
+      <div>{itemsLeft} items left</div>
       <div className="px-2 space-x-4">
         <FilterButton
           text="All"
-          isActive={cat === "all"}
-          onClick={() => setCat("all")}
+          isActive={filter === "all"}
+          onClick={() => setFilter("all")}
         />
         <FilterButton
           text="Active"
-          isActive={cat === "active"}
-          onClick={() => setCat("active")}
+          isActive={filter === "active"}
+          onClick={() => setFilter("active")}
         />
         <FilterButton
           text="Completed"
-          isActive={cat === "completed"}
-          onClick={() => setCat("completed")}
+          isActive={filter === "completed"}
+          onClick={() => setFilter("completed")}
         />
       </div>
-      <button className={`hover:text-dark-100 `}>Clear Completed</button>
+      <button className={`hover:text-dark-100 `} onClick={clearCompleted}>
+        Clear Completed
+      </button>
     </div>
   );
 };
@@ -37,7 +41,11 @@ const FilterButton: FC<FilterButtonProps> = ({ text, isActive, onClick }) => {
   return (
     <button
       onClick={onClick}
-      className={`hover:text-dark-100 ${isActive ? "text-bright-blue" : ""}`}
+      className={
+        isActive
+          ? "text-bright-blue cursor-default"
+          : "hover:text-dark-100 cursor-pointer"
+      }
     >
       {text}
     </button>
