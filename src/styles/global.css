@@ -9,8 +9,8 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-dark-600;
+  background-color: #eee;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-dark-500;
+  background-color: #aaa;
 }

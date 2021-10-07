@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
+import { useThemeContext } from "../contexts/ThemeContext";
 import { Moon } from "./icons/moon";
 import { Sun } from "./icons/sun";
 
 export const ThemeSwitcher = () => {
-  const [theme, setTheme] = useState(true);
+  const { themeIndex, toggleTheme } = useThemeContext();
   return (
-    <button onClick={() => setTheme((prev) => !prev)}>
-      {theme ? <Sun /> : <Moon />}
+    <button onClick={() => toggleTheme()}>
+      {themeIndex == 0 ? <Sun /> : <Moon />}
     </button>
   );
 };

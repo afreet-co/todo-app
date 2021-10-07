@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { useThemeContext } from "../../contexts/ThemeContext";
 
 type FilterButtonProps = {
   text: string;
@@ -11,13 +12,14 @@ export const FilterButton: FC<FilterButtonProps> = ({
   isActive,
   onClick,
 }) => {
+  const { theme } = useThemeContext();
   return (
     <button
       onClick={onClick}
       className={` font-bold ${
         isActive
           ? "text-bright-blue cursor-default"
-          : "hover:text-dark-100 cursor-pointer"
+          : `${theme.footerButtonHover} cursor-pointer`
       }`}
     >
       {text}

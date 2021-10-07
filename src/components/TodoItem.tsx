@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { useAppContext } from "../contexts/AppContext";
+import { useThemeContext } from "../contexts/ThemeContext";
 import { CustomCheckbox } from "./CustomCheckbox";
 import { Cross } from "./icons/cross";
 type TodoItemProps = {
@@ -9,12 +10,15 @@ type TodoItemProps = {
 };
 export const TodoItem: FC<TodoItemProps> = ({ id, isCompleted, text }) => {
   const { filter, removeItem, toggleIsCompleted } = useAppContext();
+  const { theme } = useThemeContext();
   return (
     <>
       {filter === "all" ||
       (filter === "active" && !isCompleted) ||
       (filter === "completed" && isCompleted) ? (
-        <div className=" group flex py-3 px-4 items-center border-b-2 sm:border-b border-solid border-dark-500 last:border-b-0 ">
+        <div
+          className={`group flex py-3 px-4 items-center border-b-2 sm:border-b border-solid ${theme.border} last:border-b-0`}
+        >
           <CustomCheckbox
             checked={isCompleted}
             controlId={"item" + id}
@@ -23,7 +27,7 @@ export const TodoItem: FC<TodoItemProps> = ({ id, isCompleted, text }) => {
           />
           <p
             className={`w-6/8 sm:w-7/8 sm:group-hover:w-6/8 ${
-              isCompleted ? "line-through text-dark-300" : "text-dark-100"
+              isCompleted ? `line-through ${theme.textMuted}` : theme.text
             }`}
           >
             {text}

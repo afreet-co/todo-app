@@ -1,6 +1,7 @@
 import "../styles/global.css";
 import Head from "next/head";
 import { AppContextProvider } from "../contexts/AppContext";
+import { ThemeContextProvider } from "../contexts/ThemeContext";
 
 const Application = ({ Component, pageProps }) => {
   return (
@@ -13,7 +14,9 @@ const Application = ({ Component, pageProps }) => {
         />
       </Head>
       <AppContextProvider>
-        <Component {...pageProps} />
+        <ThemeContextProvider>
+          <Component {...pageProps} />
+        </ThemeContextProvider>
       </AppContextProvider>
     </>
   );
