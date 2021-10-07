@@ -35,7 +35,7 @@ module.exports = {
         },
       },
       height: {
-        76: "19rem",
+        70: "17.6rem",
       },
       width: {
         "1/8": "12.5%",
@@ -45,6 +45,12 @@ module.exports = {
         "5/8": "62.5%",
         "6/8": "75%",
         "7/8": "87.5%",
+      },
+      backgroundImage: {
+        "desktop-dark": "url('/desktop-dark.jpg')",
+        "desktop-light": "url('/desktop-light.jpg')",
+        "mobile-dark": "url('/mobile-dark.jpg')",
+        "mobile-light": "url('/mobile-dark.jpg')",
       },
     },
   },

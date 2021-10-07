@@ -47,7 +47,7 @@ const Index = () => {
           />
         </form>
         <div className="mx-2 bg-dark-600 rounded-lg md:rounded shadow-lg">
-          <div className="h-76 overflow-auto">
+          <div className="h-80 md:h-70 overflow-auto">
             {todos.map((item) => (
               <TodoItem key={item.id} {...item} />
             ))}

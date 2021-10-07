@@ -25,6 +25,7 @@ const sampleTodos: Todo[] = [
   { id: 3, isCompleted: true, text: "Read for 1 hour" },
   { id: 4, isCompleted: false, text: "Pick up groceries" },
   { id: 5, isCompleted: true, text: "Create Todo App on Frontend Mentor" },
+  { id: 6, isCompleted: true, text: "Create Mentor" },
 ];
 
 const initialValues: AppContextType = {
