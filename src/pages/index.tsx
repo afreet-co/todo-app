@@ -28,7 +28,7 @@ const Index = () => {
       className={`flex items-center justify-center h-screen w-screen ${theme.screenBackground} sm:text-base text-sm transition-all duration-150`}
     >
       <div className="w-11/12 md:w-3/6 sm:w-2/5 p-2 space-y-6 sm:space-y-4">
-        <div className="flex justify-between items-center px-2 :px-2">
+        <div className="flex justify-between items-center px-2">
           <span className={`text-3xl ${theme.heading} font-bold`}>T O D O</span>
           <ThemeSwitcher />
         </div>
@@ -60,6 +60,11 @@ const Index = () => {
           className={`mx-2 rounded-lg sm:rounded shadow-lg px-5 sm:px-4 py-5 sm:py-3 block sm:hidden ${theme.primaryBackground}  transition-all duration-150`}
         >
           <Filter onMobile={true} />
+        </div>
+        <div
+          className={`${theme.textMuted} flex items-center justify-center transition-all duration-150 p-4`}
+        >
+          <span>Drag and drop to reorder list</span>
         </div>
       </div>
     </div>

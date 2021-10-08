@@ -1,6 +1,6 @@
 import React from "react";
-import { Todo, AppContext, AppContextType } from "../contexts/AppContext";
-import { ThemeContext, ThemeContextType } from "../contexts/ThemeContext";
+import { Todo, AppContext } from "../contexts/AppContext";
+import { ThemeContext } from "../contexts/ThemeContext";
 import { CustomCheckbox } from "./CustomCheckbox";
 import { Cross } from "./icons/cross";
 interface TodoItemProps {
@@ -9,13 +9,7 @@ interface TodoItemProps {
   dragHandleProps: object;
 }
 
-export class TodoItem extends React.Component<
-  TodoItemProps,
-  AppContextType & ThemeContextType
-> {
-  static appContext = AppContext;
-  static themeContext = ThemeContext;
-
+export class TodoItem extends React.Component<TodoItemProps, void> {
   render() {
     const {
       item: { id, isCompleted, text },

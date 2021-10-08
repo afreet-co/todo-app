@@ -50,7 +50,7 @@ module.exports = {
         "desktop-dark": "url('/desktop-dark.jpg')",
         "desktop-light": "url('/desktop-light.jpg')",
         "mobile-dark": "url('/mobile-dark.jpg')",
-        "mobile-light": "url('/mobile-dark.jpg')",
+        "mobile-light": "url('/mobile-light.jpg')",
       },
     },
   },

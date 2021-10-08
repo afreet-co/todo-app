@@ -1,6 +1,6 @@
 {
-  "name": "next-tail-ghpage-ts",
-  "description": "A project to be used as a starter for Next.js project which includes tailwind, it's configuration, typescript and also the github action workflow deployment to Github pages after pushing commit to the master branch.",
+  "name": "todo-app",
+  "description": "A todo app with theme switcher and draggable items functionality",
   "private": true,
   "scripts": {
     "dev": "next dev",

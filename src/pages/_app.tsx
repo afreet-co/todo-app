@@ -7,7 +7,7 @@ const Application = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
-        <title>Next Tail GhPage TS</title>{" "}
+        <title>Frontend Mentor | Todo app</title>
         <link
           rel="icon"
           href={`${process.env.NEXT_PUBLIC_PREFIX}/favicon-32x32.png`}
