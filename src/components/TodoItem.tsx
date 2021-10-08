@@ -9,7 +9,7 @@ interface TodoItemProps {
   dragHandleProps: object;
 }
 
-export class TodoItem extends React.Component<TodoItemProps, void> {
+export class TodoItem extends React.Component<TodoItemProps, {}> {
   render() {
     const {
       item: { id, isCompleted, text },
